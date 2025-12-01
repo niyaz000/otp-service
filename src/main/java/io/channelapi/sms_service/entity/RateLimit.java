@@ -18,7 +18,7 @@ import org.springframework.http.HttpMethod;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "roles")
+@Table(name = "rate_limits")
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)

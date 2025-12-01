@@ -37,8 +37,12 @@ public class SecurityPolicy extends ScopedEntity {
     private String description;
 
     @NotNull
-    @Column(name = "ip_address", nullable = false)
-    private String ipAddress;
+    @Column(name = "ipv4_address", nullable = false)
+    private String ipv4Address;
+
+    @NotNull
+    @Column(name = "ipv6_address", nullable = false)
+    private String ipv6Address;
 
     @NotNull
     @Column(name = "action", nullable = false)

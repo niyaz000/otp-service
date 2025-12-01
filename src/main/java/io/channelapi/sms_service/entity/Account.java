@@ -40,4 +40,7 @@ public class Account extends BaseEntity {
     @Column(name = "tags", nullable = false, columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, String> tags;
+
+    @Column(name = "tenant", insertable = false, updatable = false)
+    private Tenant tenant;
 }

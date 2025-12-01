@@ -35,5 +35,4 @@ public class Permission extends ScopedEntity {
 
     @Column(name = "is_default", nullable = false)
     private boolean isDefault;
-    
 }

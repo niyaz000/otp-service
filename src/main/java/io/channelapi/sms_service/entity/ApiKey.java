@@ -26,6 +26,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class ApiKey extends ScopedEntity {
 
     @NotNull
-    @Column(name = "key_value", nullable = false, updatable = false)
+    @Column(name = "key", nullable = false, updatable = false)
     private String key;    
 }

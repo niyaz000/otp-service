@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -38,18 +37,6 @@ public class ReceipientList extends ScopedEntity {
     @Column(name = "description", nullable = true)
     @NotNull
     private String description;
-
-    @NotNull
-    @Column(name = "account_id", nullable = false, updatable = false)
-    private Integer accountId;
-
-    @NotNull
-    @Column(name = "tenant_id", nullable = false, updatable = false)
-    private Integer tenantId;
-
-    @Column(name = "tags", nullable = false, columnDefinition = "jsonb")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, String> tags;
 
     @Column(name = "contact_ids", nullable = false, columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)

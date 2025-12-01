@@ -12,42 +12,48 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.OffsetDateTime;
-
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import io.channelapi.sms_service.enums.ScheduleType;
+import io.channelapi.sms_service.enums.UserRole;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "schedules")
+@Table(name = "users")
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor
 @DynamicUpdate
 @SuperBuilder
-public class Schedule extends ScopedEntity {
+public class User extends ScopedEntity {
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
     @NotNull
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @NotNull
-    @Column(name = "start_time", nullable = false)
-    private OffsetDateTime startTime;
+    @Column(name = "email", nullable = false)
+    private String email;
 
     @NotNull
-    @Column(name = "end_time", nullable = false)
-    private OffsetDateTime endTime;
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 
     @NotNull
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+
+    @NotNull
+    @Column(name = "external_id", nullable = false)
+    private String externalId;
+
+    @NotNull
+    @Column(name = "role", nullable = false)
     @Enumerated(jakarta.persistence.EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private ScheduleType type;  
+    private UserRole role;
 }

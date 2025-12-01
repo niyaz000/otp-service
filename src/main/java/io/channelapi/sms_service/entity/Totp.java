@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "tenants")
+@Table(name = "totps")
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)
@@ -31,5 +31,13 @@ public class Totp extends ScopedEntity {
 
     @NotNull
     @Column(name = "secret_key", nullable = false)
-    private String secretKey;    
+    private String secretKey;  
+    
+    @NotNull
+    @Column(name = "period", nullable = false)
+    private Integer period;
+
+    @NotNull
+    @Column(name = "digits", nullable = false)
+    private Integer digits;
 }
