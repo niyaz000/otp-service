@@ -3,7 +3,6 @@ package io.channelapi.sms_service.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,7 +11,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 import java.util.Map;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,41 +18,35 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import io.swagger.v3.oas.models.PathItem.HttpMethod;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "web_hooks")
+@Table(name = "coupons")
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor
 @DynamicUpdate
 @SuperBuilder
-public class WebHook extends ScopedEntity {
+public class Coupon extends BaseEntity {
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "code", nullable = false, updatable = false)
+    private String code;
 
     @NotNull
-    @Column(name = "url", nullable = false)
-    private String url;
+    @Column(name = "discount_percentage")
+    private Integer discountPercentage;
 
     @NotNull
-    @Column(name = "http_method", nullable = false)
-    @Enumerated(jakarta.persistence.EnumType.STRING)
-    private HttpMethod httpMethod;
+    @Column(name = "discount_amount")
+    private Integer discountAmount;
 
     @NotNull
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "max_discount", nullable = false)
+    private Integer maxDiscount;
 
+    @Column(name = "tags", nullable = false, columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "headers", nullable = false, columnDefinition = "jsonb")
-    private Map<String, String> headers;
+    private Map<String, String> tags;
     
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "events", nullable = false, columnDefinition = "jsonb")
-    private List<String> events;
 }

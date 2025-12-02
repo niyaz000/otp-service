@@ -29,7 +29,7 @@ public class AccountInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) {
         RequestContextHolder.clearContext();
-        var accountIdHeader = Objects.requireNonNullElse(request.getHeader("X-Account-ID"), "");
+        var accountIdHeader = Objects.requireNonNullElse(request.getHeader(LoggerConstants.X_ACCOUNT_ID), "");
         if (accountIdHeader.isBlank()) {
             var error = new FieldError(LoggerConstants.X_ACCOUNT_ID, accountIdHeader, ApiConstants.MISSING_HEADER, "X-Account-ID header is required.");
             responseUtil.handleValidationError(request, error, response);
@@ -76,7 +76,7 @@ public class AccountInterceptor implements HandlerInterceptor {
             var error = new FieldError(LoggerConstants.X_TENANT_ID, tenantIdHeader, "deleted_tenant", "The tenant associated with the given X-Tenant-ID has been deleted.");
             responseUtil.handleValidationError(request, error, response);
             return false;
-        }        
+        }
         if (!account.get().getTenantId().equals(tenantId)) {
             var error = new FieldError(LoggerConstants.X_TENANT_ID, tenantIdHeader, "invalid_tenant", "The tenant ID does not match the account's tenant.");
             responseUtil.handleValidationError(request, error, response);

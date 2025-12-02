@@ -9,6 +9,9 @@ public class RequestContextHolder {
     }
 
     public static RequestContext getContext() {
+        if (contextHolder.get() == null) {
+            throw new IllegalStateException("RequestContext is not set");
+        }
         return contextHolder.get();
     }
 

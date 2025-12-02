@@ -34,6 +34,7 @@
     	<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<org.json.version>20250517</org.json.version>
 		<jedis.version>7.1.0</jedis.version>
+		<commons.lang3.version>3.20.0</commons.lang3.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -171,6 +172,11 @@
 		<groupId>redis.clients</groupId>
 		<artifactId>jedis</artifactId>
 		<version>${jedis.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>${commons-lang3.version}</version>
 	</dependency>	
 
 	</dependencies>
