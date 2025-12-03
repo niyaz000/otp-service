@@ -24,14 +24,14 @@ import io.channelapi.sms_service.enums.AccountTier;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "accounts")
+@Table(name = "plans")
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor
 @DynamicUpdate
 @SuperBuilder
-public class AccountType extends BaseEntity {
+public class Plan extends BaseEntity {
 
     @NotNull
     @Column(name = "type_name", nullable = false, updatable = false)
@@ -40,7 +40,7 @@ public class AccountType extends BaseEntity {
     @NotNull
     @Column(name = "description", nullable = false)
     private String description;
-    
+
     @Column(name = "grace_period_days", nullable = false)
     private int gracePeriodDays;
 

@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS tenants (
     id SERIAL PRIMARY KEY,
     name VARCHAR(64) NOT NULL,
@@ -24,8 +23,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS uc_tenants_phone_number_unique ON tenants(phon
 CREATE UNIQUE INDEX IF NOT EXISTS uc_tenants_name ON tenants(name);
 
 -- Enable Row Level Security
-ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
+ALTER TABLE
+    tenants ENABLE ROW LEVEL SECURITY;
 
 -- Create RLS policy to filter rows based on current_tenant_id
-CREATE POLICY tenant_isolation_policy ON tenants
-    USING (id = current_setting('app.current_tenant_id', true)::BIGINT);
+CREATE POLICY tenant_isolation_policy ON tenants USING (
+    id = current_setting('app.current_tenant_id', false) :: BIGINT
+);

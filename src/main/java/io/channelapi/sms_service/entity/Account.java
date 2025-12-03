@@ -6,6 +6,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,19 +32,24 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @SuperBuilder
 public class Account extends BaseEntity {
 
-    @NotNull
+    @NotNull()
     @Column(name = "name", nullable = false, updatable = false)
+    @NotBlank()
     private String name;
 
-    @NotNull
+    @NotNull()
+    @Column(name = "description", nullable = true, updatable = true)
+    private String description;
+
+    @NotNull()
     @Column(name = "tenant_id", nullable = false, updatable = false)
     private Long tenantId;
-    
+
     @Column(name = "tags", nullable = false, columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, String> tags;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = jakarta.persistence.FetchType.LAZY)
     @JoinColumn(name = "tenant_id", insertable = false, updatable = false)
     private Tenant tenant;
 }

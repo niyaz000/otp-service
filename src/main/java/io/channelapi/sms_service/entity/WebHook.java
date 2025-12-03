@@ -53,7 +53,7 @@ public class WebHook extends ScopedEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "headers", nullable = false, columnDefinition = "jsonb")
     private Map<String, String> headers;
-    
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "events", nullable = false, columnDefinition = "jsonb")
     private List<String> events;

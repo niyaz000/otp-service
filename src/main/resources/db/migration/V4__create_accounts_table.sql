@@ -1,7 +1,7 @@
-
 CREATE TABLE IF NOT EXISTS accounts (
     id SERIAL PRIMARY KEY,
     name VARCHAR(64) NOT NULL,
+    description VARCHAR(512) DEFAULT NULL,
     tenant_id BIGINT NOT NULL REFERENCES tenants(id),
     active BOOLEAN NOT NULL DEFAULT true,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -15,8 +15,10 @@ CREATE TABLE IF NOT EXISTS accounts (
 CREATE UNIQUE INDEX IF NOT EXISTS uc_accounts_name_unique ON accounts(tenant_id, name);
 
 -- Enable Row Level Security
-ALTER TABLE accounts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE
+    accounts ENABLE ROW LEVEL SECURITY;
 
 -- Create RLS policy to filter rows based on current_tenant_id
-CREATE POLICY tenant_isolation_policy ON accounts
-    USING (tenant_id = current_setting('app.current_tenant_id', true)::BIGINT);
+CREATE POLICY tenant_isolation_policy ON accounts USING (
+    tenant_id = current_setting('app.current_tenant_id', false) :: BIGINT
+);

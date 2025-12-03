@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class TemplateService {
 
     private final TemplateRepository templateRepository;
-    
+
     public TemplateCreateResponse create(TemplateCreateRequest request) {
         var entity = TemplateMapper.INSTANCE.toEntity(request);
         entity.setTenantId(1L);

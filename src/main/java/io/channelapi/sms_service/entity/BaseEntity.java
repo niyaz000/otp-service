@@ -30,7 +30,7 @@ public class BaseEntity implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Column(name = "created_at", nullable = false, updatable = false)
   @CreatedDate
@@ -50,7 +50,7 @@ public class BaseEntity implements Serializable {
 
   @Version
   @Column(name = "version", nullable = false)
-  private Integer version;
+  private Long version;
 
   @Column(name = "request_id", nullable = false)
   private UUID requestId;
@@ -67,5 +67,5 @@ public class BaseEntity implements Serializable {
   protected void onUpdate() {
     requestId = LoggerUtil.currentRequestUuId();
   }
-    
+
 }

@@ -1,4 +1,5 @@
 package io.channelapi.sms_service.entity;
+
 import java.util.Map;
 
 import org.hibernate.annotations.JdbcTypeCode;
@@ -23,8 +24,8 @@ public class ScopedEntity extends BaseEntity {
 
     @NotNull
     @Column(name = "tenant_id", nullable = true, updatable = false)
-    private Integer tenantId;
-    
+    private Long tenantId;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "tags", nullable = false, columnDefinition = "jsonb")
     private Map<String, String> tags;
